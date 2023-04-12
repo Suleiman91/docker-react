@@ -1,0 +1,10 @@
+FROM node:alpine
+
+WORKDIR /app
+
+COPY package.json .
+RUN npm install
+#we can get rid of the next copy statement, because we added - .:/app to make a volume reference to the original files path. But we keep it as a reference for the future
+COPY . .
+
+CMD ["npm","run","start"]

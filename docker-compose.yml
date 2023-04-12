@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web: # Development container
+    build: #we can directly here write . as the current context or we use the below options if the docker file name is customized
+      context: . # we can write . as the current context folder, or we just write the name of required folder like: context: name-of-folder
+      dockerfile: Dockerfile.dev # name of custom docker file
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+  tests: # Testing container
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"] #To override default command
