@@ -16,7 +16,7 @@ deploy: #To automatically deploy from Travis to AWS
   bucket_name: "elasticbeanstalk-eu-north-1-735017606983" #Name of HD containing and running your app on AWS (Search for S3 in services in AWS - Scalable storage in the cloud)
   bucket_path: "docker-react" # Name of the folder containing your app in the bucket in AWS, mostly created by default when you first employ with the same name as your app
   on:
-    branch: master
+    branch: main
   access_key_id: $AWS_ACCESS_KEY
 
     #password: |c%Mc68$
