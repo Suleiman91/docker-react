@@ -18,7 +18,10 @@ deploy: #To automatically deploy from Travis to AWS
   on:
     branch: main
   access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_ACCESS_KEY"
 
+    # To work with users search for IAM, to work with buckets search for s3: scalable storage in the cloud
     #password: |c%Mc68$
     #url: https://735017606983.signin.aws.amazon.com/console
     #username: docker-react-travis-ci
