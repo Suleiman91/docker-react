@@ -1,9 +1,25 @@
-sudo: required
-services:
+sudo: required #It means we need super user level permissions
+services: #To tell travis that we need docker CLI so prepare copy of docker ready to go
   - docker
 
-before_install:
+before_install: #Series of commands will run before our deploy or test
   - docker build -t suleiman991/docker-react -f Dockerfile.dev .
 
-script:
-  - docker run -e CI=true suleiman991/docker-react npm run test
+script: #Commands to execute to run the test (or deploy), and these commands should return success value (0)
+  - docker run -e CI=true suleiman991/docker-react npm run test #The CI is to return the value of command status of the testing command
+
+deploy: #To automatically deploy from Travis to AWS
+  provider: elasticbeanstalk #Because Travis CI is preconfigured to deploy our app to some providers one of them is ealsticbeanstalk
+  region: "eu-north-1" # Geographic region, you take it from elasticbeanstalk link (Dockerreact-env.eba-nyd8v5f2.eu-north-1.elasticbeanstalk.com)
+  app: "docker-react" # Name of app in elasticbearns AWS that you chose
+  env: "Dockerreact-env" # Environment name on AWS
+  bucket_name: "elasticbeanstalk-eu-north-1-735017606983" #Name of HD containing and running your app on AWS (Search for S3 in services in AWS - Scalable storage in the cloud)
+  bucket_path: "docker-react" # Name of the folder containing your app in the bucket in AWS, mostly created by default when you first employ with the same name as your app
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+
+    #password: |c%Mc68$
+    #url: https://735017606983.signin.aws.amazon.com/console
+    #username: docker-react-travis-ci
+    #accessKey: HpwYcl/oVn1/lS+yr/qLPjgB5eoI1fnyZK+tjhhS
