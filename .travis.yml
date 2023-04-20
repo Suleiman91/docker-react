@@ -19,7 +19,7 @@ deploy: #To automatically deploy from Travis to AWS
     branch: main
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key:
-    secure: "$AWS_SECRET_ACCESS_KEY"
+    secure: $AWS_SECRET_ACCESS_KEY
 
     # To work with users search for IAM, to work with buckets search for s3: scalable storage in the cloud
     #password: |c%Mc68$
